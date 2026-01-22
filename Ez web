@@ -1,0 +1,612 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Developer Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f172a, #7e22ce, #0f172a);
+            color: white;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            position: relative;
+            overflow: hidden;
+            padding: 120px 0 80px;
+        }
+
+        .header-content {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .avatar {
+            width: 96px;
+            height: 96px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 32px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .avatar i {
+            font-size: 48px;
+            color: white;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 24px;
+            background: linear-gradient(45deg, #ffffff, #c7d2fe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header-text {
+            font-size: 1.5rem;
+            color: #cbd5e1;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            background: linear-gradient(45deg, #ffffff, #c7d2fe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-header p {
+            font-size: 1.125rem;
+            color: #94a3b8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 32px;
+        }
+
+        .skill-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .skill-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .skill-name {
+            font-weight: 600;
+            font-size: 1.125rem;
+        }
+
+        .skill-level {
+            color: #c4b5fd;
+            font-weight: 600;
+        }
+
+        .skill-bar {
+            width: 100%;
+            height: 8px;
+            background: #334155;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(90deg, #60a5fa, #8b5cf6);
+            border-radius: 4px;
+            transition: width 1s ease-out;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            border-color: rgba(147, 51, 234, 0.5);
+            transform: translateY(-5px);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover .project-image {
+            transform: scale(1.05);
+        }
+
+        .project-content {
+            padding: 24px;
+        }
+
+        .project-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: white;
+        }
+
+        .project-description {
+            color: #94a3b8;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .tech-tag {
+            background: rgba(147, 51, 234, 0.2);
+            color: #c4b5fd;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            border: 1px solid rgba(147, 51, 234, 0.3);
+        }
+
+        .project-links {
+            display: flex;
+            gap: 16px;
+        }
+
+        .project-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .project-link:hover {
+            color: white;
+        }
+
+        /* CTA Section */
+        .cta-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .cta-card {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(124, 58, 237, 0.2));
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 60px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .cta-icon {
+            font-size: 64px;
+            margin-bottom: 24px;
+            color: white;
+        }
+
+        .cta-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            background: linear-gradient(45deg, #ffffff, #c7d2fe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .cta-text {
+            color: #94a3b8;
+            margin-bottom: 32px;
+            font-size: 1.125rem;
+        }
+
+        .cta-button {
+            background: linear-gradient(90deg, #3b82f6, #7c3aed);
+            color: white;
+            border: none;
+            padding: 16px 48px;
+            border-radius: 12px;
+            font-size: 1.125rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            transform: scale(1);
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(124, 58, 237, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            padding: 32px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+
+        .footer-text {
+            color: #64748b;
+            font-size: 0.95rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .header-text {
+                font-size: 1.25rem;
+            }
+            
+            .section-header h2 {
+                font-size: 2rem;
+            }
+            
+            .cta-card {
+                padding: 40px 20px;
+            }
+            
+            .cta-title {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .header-text {
+                font-size: 1.125rem;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="avatar">
+                    <i class="fas fa-code"></i>
+                </div>
+                <h1>Developer Portfolio</h1>
+                <p class="header-text">Showcasing my passion for creating beautiful, functional, and innovative web applications</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Skills Section -->
+    <section>
+        <div class="container">
+            <div class="section-header">
+                <h2>My Skills</h2>
+                <p>Technologies I work with daily</p>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-header">
+                        <span class="skill-name">JavaScript</span>
+                        <span class="skill-level">95%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 95%;"></div>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-header">
+                        <span class="skill-name">React</span>
+                        <span class="skill-level">90%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 90%;"></div>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-header">
+                        <span class="skill-name">TypeScript</span>
+                        <span class="skill-level">85%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 85%;"></div>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-header">
+                        <span class="skill-name">Node.js</span>
+                        <span class="skill-level">80%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 80%;"></div>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-header">
+                        <span class="skill-name">Python</span>
+                        <span class="skill-level">75%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 75%;"></div>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-header">
+                        <span class="skill-name">HTML/CSS</span>
+                        <span class="skill-level">95%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 95%;"></div>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-header">
+                        <span class="skill-name">UI/UX Design</span>
+                        <span class="skill-level">85%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 85%;"></div>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-header">
+                        <span class="skill-name">Git & GitHub</span>
+                        <span class="skill-level">90%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 90%;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section style="background: rgba(0, 0, 0, 0.2);">
+        <div class="container">
+            <div class="section-header">
+                <h2>Featured Projects</h2>
+                <p>A collection of my recent work and experiments</p>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <img src="https://placehold.co/600x400/4f46e5/ffffff?text=E-Commerce+Dashboard" alt="E-Commerce Dashboard" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">E-Commerce Dashboard</h3>
+                        <p class="project-description">A responsive admin dashboard built with React and Tailwind CSS featuring real-time analytics and order management.</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">Tailwind CSS</span>
+                            <span class="tech-tag">Node.js</span>
+                            <span class="tech-tag">MongoDB</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">
+                                <i class="fab fa-github"></i>
+                                Code
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>
+                                Live Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <img src="https://placehold.co/600x400/0ea5e9/ffffff?text=Weather+App" alt="Weather Forecast App" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">Weather Forecast App</h3>
+                        <p class="project-description">Beautiful weather application with location-based forecasts, interactive maps, and 7-day predictions.</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">API Integration</span>
+                            <span class="tech-tag">CSS3</span>
+                            <span class="tech-tag">Geolocation</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">
+                                <i class="fab fa-github"></i>
+                                Code
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>
+                                Live Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <img src="https://placehold.co/600x400/10b981/ffffff?text=Task+Manager" alt="Task Management System" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">Task Management System</h3>
+                        <p class="project-description">Full-stack task manager with drag-and-drop functionality, user authentication, and collaborative features.</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">TypeScript</span>
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">Express</span>
+                            <span class="tech-tag">PostgreSQL</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">
+                                <i class="fab fa-github"></i>
+                                Code
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>
+                                Live Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <img src="https://placehold.co/600x400/f59e0b/ffffff?text=Portfolio+Site" alt="Portfolio Website" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">Portfolio Website</h3>
+                        <p class="project-description">Modern portfolio website showcasing design skills with smooth animations and responsive layout.</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">HTML5</span>
+                            <span class="tech-tag">CSS3</span>
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">Framer Motion</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">
+                                <i class="fab fa-github"></i>
+                                Code
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>
+                                Live Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <img src="https://placehold.co/600x400/ef4444/ffffff?text=Fitness+Tracker" alt="Fitness Tracker" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">Fitness Tracker</h3>
+                        <p class="project-description">Mobile-first fitness application to track workouts, nutrition, and progress with data visualization.</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">React Native</span>
+                            <span class="tech-tag">Firebase</span>
+                            <span class="tech-tag">Chart.js</span>
+                            <span class="tech-tag">Redux</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">
+                                <i class="fab fa-github"></i>
+                                Code
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>
+                                Live Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <img src="https://placehold.co/600x400/8b5cf6/ffffff?text=Blog+Platform" alt="Blog Platform" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">Blog Platform</h3>
+                        <p class="project-description">Content management system with rich text editing, SEO optimization, and social sharing features.</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Next.js</span>
+                            <span class="tech-tag">GraphQL</span>
+                            <span class="tech-tag">Prisma</span>
+                            <span class="tech-tag">Vercel</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">
+                                <i class="fab fa-github"></i>
+                                Code
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>
+                                Live Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section>
+        <div class="container">
+            <div class="cta-container">
+                <div class="cta-card">
+                    <i class="fas fa-camera cta-icon"></i>
+                    <h3 class="cta-title">Let's Build Something Amazing</h3>
+                    <p class="cta-text">I'm always excited to collaborate on new projects and bring innovative ideas to life.</p>
+                    <button class="cta-button">Get In Touch</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p class="footer-text">© 2026 Developer Portfolio. Built with HTML, CSS, and pure passion.</p>
+        </div>
+    </footer>
+</body>
+</html>
+```
